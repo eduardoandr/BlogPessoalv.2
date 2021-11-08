@@ -17,13 +17,16 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	public Usuario CadastrarUsuario(Usuario usuario) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	public Optional<Object> cadastrarUsuario(Usuario usuario) {
+		return repository.findByUsuario(usuario.getUsuario()).map(resp -> {
+			return Optional.empty();
+		}).orElseGet(() -> {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String senhaEncoder = encoder.encode(usuario.getSenha());
+			usuario.setSenha(senhaEncoder);
+			return Optional.ofNullable(repository.save(usuario));
+		});
 
-		String senhaEncoder = encoder.encode(usuario.getSenha());
-		usuario.setSenha(senhaEncoder);
-
-		return repository.save(usuario);
 	}
 
 	public Optional<UserLogin> Logar(Optional<UserLogin> user) {
@@ -39,6 +42,7 @@ public class UsuarioService {
 
 				user.get().setToken(authHeader);
 				user.get().setNome(usuario.get().getNome());
+				user.get().setSenha(usuario.get().getSenha());
 
 				return user;
 			}

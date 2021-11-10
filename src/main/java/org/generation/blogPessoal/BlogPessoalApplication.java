@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SpringBootApplication
 @RestController
 @RequestMapping("/")
-public class BlogpessoalApplication {
+public class BlogPessoalApplication {
 	
 	@GetMapping
 	public ModelAndView swaggerUi() {
@@ -18,6 +18,6 @@ public class BlogpessoalApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(BlogpessoalApplication.class, args);
+		SpringApplication.run(BlogPessoalApplication.class, args);
 	}
 }

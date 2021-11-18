@@ -8,6 +8,7 @@ import org.generation.blogPessoal.model.UserLogin;
 import org.generation.blogPessoal.model.Usuario;
 import org.generation.blogPessoal.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,10 @@ public class UsuarioService {
 				return user;
 			}
 		}
+		return null;
+	}
+
+	public ResponseEntity<Usuario> findByIdUsuario(Long id) {
 		return null;
 	}
 

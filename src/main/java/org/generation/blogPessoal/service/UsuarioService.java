@@ -55,7 +55,8 @@ public class UsuarioService {
 	}
 
 	public ResponseEntity<Usuario> findByIdUsuario(Long id) {
-		return null;
+		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.status(404).build());
+
 	}
 
 }
